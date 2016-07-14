@@ -7,7 +7,7 @@ object TestCsvData {
   def main(args: Array[String]): Unit = {
     val conf = TestCsvConf.getInstance(args)
     val (header, sample) = getSampleData(conf)
-    val testData = createCopyData(sample, conf)
+    val testData = createCopyData(sample, header, conf)
     dumpCsvData(header, testData, conf)
   }
 
@@ -20,9 +20,8 @@ object TestCsvData {
     (header, sample)
    }
 
-  def createCopyData(sample: Map[String, String],  conf: TestCsvConf): List[List[String]]= {
+  def createCopyData(sample: Map[String, String],  header: Seq[String], conf: TestCsvConf): List[List[String]]= {
     val incIds = conf.incrementIds
-    val header = sample.keySet
     val data = for( i <- 1 to conf.recordSize) yield {
       header.map{ col =>
         sample.get(col) match{
