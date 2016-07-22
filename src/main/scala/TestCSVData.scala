@@ -35,7 +35,7 @@ object TestCsvData {
   }
 
   def dumpCsvData(header: Seq[String], data: List[List[String]], conf:TestCsvConf) = {
-    val file = new File("out.csv")
+    val file = new File(conf.outName)
     val writer = CSVWriter.open(file)
     writer.writeAll(header :: data)
     writer.close

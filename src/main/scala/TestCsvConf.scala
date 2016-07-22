@@ -6,6 +6,7 @@ import java.io._
 
 case class TestCsvConf private(encoding: String,
    fileName: String,
+   outName: String,
    recordSize: Int,
    incrementIds: List[String]
  )
@@ -20,8 +21,9 @@ object  TestCsvConf {
     }
     val encoding = config.getString("encoding")
     val file = config.getString("file")
+    val outName = config.getString("outName")
     val recordSize = config.getInt("recordSize")
     val incrementIds = config.getStringList("incrementIds").asScala.toList
-    new TestCsvConf(encoding, file, recordSize,  incrementIds)
+    new TestCsvConf(encoding, file, outName, recordSize,  incrementIds)
   }
 }
