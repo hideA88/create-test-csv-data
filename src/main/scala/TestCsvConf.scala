@@ -1,5 +1,9 @@
 package com.github.hideA88.testcsvdata
 
+import com.typesafe.config.ConfigFactory
+import scala.collection.JavaConverters._
+import java.io._
+
 case class TestCsvConf private(encoding: String,
    fileName: String,
    recordSize: Int,
@@ -8,6 +12,16 @@ case class TestCsvConf private(encoding: String,
 
 object  TestCsvConf {
   def getInstance(args: Array[String]): TestCsvConf = {
-    new TestCsvConf("sjis", "sample.csv", 100,  List("id", "title"))
+    var confFile = new File("./application.conf")
+    val config = if(confFile.exists()){
+       ConfigFactory.parseFile(confFile).getConfig("conf")
+    }else{
+       ConfigFactory.load().getConfig("conf") // defaultとしてsrc/main/resources/application.conf が読まれる
+    }
+    val encoding = config.getString("encoding")
+    val file = config.getString("file")
+    val recordSize = config.getInt("recordSize")
+    val incrementIds = config.getStringList("incrementIds").asScala.toList
+    new TestCsvConf(encoding, file, recordSize,  incrementIds)
   }
 }
