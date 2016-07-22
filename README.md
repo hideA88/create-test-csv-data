@@ -6,8 +6,9 @@
 ## 使い方
 
 ### 準備
-1. 実行ディレクトリに`application.conf`を配置して以下のように記述してください
 
+1. 実行ディレクトリに`application.conf`を配置して以下のように記述してください
+```scala
     conf{
       encoding = "sjis" #fileの文字コード
       file = "sample.csv" #サンプルcsvのファイルパス
@@ -15,6 +16,7 @@
       incrementIds = ["id", "title"] # インクリメントする列のID
       recordSize = 1000 #生成するデータのレコード数
     }
+```  
 
 2. テストデータのサンプルとなるcsvを指定したディレクトリに配置してください
 
